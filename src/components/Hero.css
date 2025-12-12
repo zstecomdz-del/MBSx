@@ -169,6 +169,7 @@
   color: var(--accent-gold);
   position: relative;
   display: inline-block;
+  white-space: pre-line;
 }
 
 .hero-highlight::after {
