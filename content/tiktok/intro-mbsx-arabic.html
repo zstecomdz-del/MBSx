@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBSx - وكالة صحافة البيانات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!--
+  VOICEOVER SCRIPT (Arabic):
+
+  [0.0s - 2.0s]: في عالم مليء بالبيانات...
+  [2.0s - 4.0s]: من يملك القصة... يملك التأثير
+  [4.0s - 6.5s]: MBSx - وكالة صحافة البيانات
+  [6.5s - 9.0s]: نحول الأرقام المعقدة إلى قصص مؤثرة
+  [9.0s - 12.0s]: تقارير احترافية... لوحات تفاعلية... استشارات استراتيجية
+  [12.0s - 15.0s]: خمسمئة تقرير... مئة وخمسون مؤسسة... ثلاث لغات
+  [15.0s - 17.0s]: القطاع الإعلامي والاقتصادي... شريكك الموثوق
+  [17.0s - 19.0s]: MBSx - البيانات تتحدث
+
+  ELEVENLABS VOICE: Arabic Male - Adam (or custom Arabic voice)
+  SETTINGS: Stability 0.5 | Clarity 0.75 | Style 0.3
+
+  HASHTAGS: #صحافة_البيانات #MBSx #تقارير #بيانات #إعلام #اقتصاد #تحليل_بيانات
+  -->
+  <style>
+    :root {
+      --primary-900: #0a1628;
+      --primary-800: #0f2847;
+      --primary-700: #1a3a5c;
+      --primary-600: #2a5078;
+      --primary-500: #3d6a99;
+      --accent-gold: #d4af37;
+      --accent-gold-light: #f4d03f;
+      --accent-cyan: #00d4ff;
+      --accent-cyan-glow: rgba(0, 212, 255, 0.4);
+      --text-white: #ffffff;
+      --text-light: rgba(255, 255, 255, 0.85);
+      --text-muted: rgba(255, 255, 255, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Kufi Arabic', sans-serif;
+      background: var(--primary-900);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 1080px;
+      height: 1920px;
+      transform: scale(0.45);
+      transform-origin: center;
+      position: relative;
+      background: linear-gradient(180deg, var(--primary-900) 0%, var(--primary-800) 50%, var(--primary-900) 100%);
+      overflow: hidden;
+    }
+
+    /* Animated Background Grid */
+    .bg-grid {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      right: -50%;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: grid-move 20s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes grid-move {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Floating Data Particles */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /* Glowing Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-cyan);
+      top: 10%;
+      right: -10%;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-gold);
+      bottom: 20%;
+      left: -5%;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--primary-500);
+      top: 50%;
+      right: 30%;
+    }
+
+    /* Data Lines */
+    .data-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    .data-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      animation: line-flow 3s ease-in-out infinite;
+    }
+
+    @keyframes line-flow {
+      0%, 100% { transform: translateX(-100%); opacity: 0; }
+      50% { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Scenes */
+    .scene {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      padding: 80px;
+    }
+
+    /* Scene 1: Hook */
+    .scene-1 .hook-text {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--text-white);
+      text-align: center;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .scene-1 .hook-highlight {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 40px var(--accent-cyan-glow);
+    }
+
+    /* Scene 2: Brand Reveal */
+    .scene-2 .brand-container {
+      text-align: center;
+    }
+
+    .scene-2 .brand-logo {
+      font-size: 180px;
+      font-weight: 900;
+      color: var(--text-white);
+      letter-spacing: -4px;
+      opacity: 0;
+      transform: scale(0.5);
+      text-shadow: 0 0 60px var(--accent-cyan-glow);
+    }
+
+    .scene-2 .brand-logo span {
+      color: var(--accent-gold);
+    }
+
+    .scene-2 .brand-tagline {
+      font-size: 48px;
+      font-weight: 500;
+      color: var(--accent-cyan);
+      margin-top: 30px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .scene-2 .brand-subtitle {
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 40px;
+      max-width: 800px;
+      line-height: 1.6;
+      opacity: 0;
+    }
+
+    /* Scene 3: Services */
+    .scene-3 .services-title {
+      font-size: 52px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 60px;
+      opacity: 0;
+    }
+
+    .scene-3 .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .scene-3 .service-card {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 24px;
+      padding: 50px 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+
+    .scene-3 .service-card .number {
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--accent-cyan);
+      margin-bottom: 15px;
+    }
+
+    .scene-3 .service-card .name {
+      font-size: 38px;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    /* Scene 4: Stats */
+    .scene-4 .stats-container {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .scene-4 .stat-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      opacity: 0;
+      transform: translateX(50px);
+    }
+
+    .scene-4 .stat-number {
+      font-size: 120px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      min-width: 300px;
+      text-align: left;
+    }
+
+    .scene-4 .stat-label {
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--text-light);
+      text-align: right;
+    }
+
+    .scene-4 .stat-plus {
+      font-size: 80px;
+      color: var(--accent-gold);
+    }
+
+    /* Scene 5: CTA */
+    .scene-5 .cta-container {
+      text-align: center;
+    }
+
+    .scene-5 .cta-sectors {
+      font-size: 44px;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+
+    .scene-5 .cta-sectors span {
+      color: var(--accent-cyan);
+    }
+
+    .scene-5 .cta-brand {
+      font-size: 160px;
+      font-weight: 900;
+      color: var(--text-white);
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    .scene-5 .cta-brand span {
+      color: var(--accent-gold);
+    }
+
+    .scene-5 .cta-slogan {
+      font-size: 56px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-top: 40px;
+      opacity: 0;
+      text-shadow: 0 0 30px var(--accent-cyan-glow);
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold));
+      transition: width 0.1s linear;
+    }
+
+    /* Animated Number Counter */
+    .counter {
+      display: inline-block;
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+      50% { box-shadow: 0 0 60px rgba(0, 212, 255, 0.6); }
+    }
+
+    /* Float Animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Shine Effect */
+    .shine {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+      );
+      transform: translateX(-100%);
+    }
+
+    @keyframes shine-move {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="particles" id="particles"></div>
+    <div class="data-lines" id="dataLines"></div>
+
+    <!-- Scene 1: Hook -->
+    <div class="scene scene-1" id="scene1">
+      <div class="hook-text" id="hookText1">
+        في عالم مليء بـ<span class="hook-highlight">البيانات</span>...
+      </div>
+      <div class="hook-text" id="hookText2" style="margin-top: 60px;">
+        من يملك <span class="hook-highlight">القصة</span>
+        <br>يملك <span class="hook-highlight">التأثير</span>
+      </div>
+    </div>
+
+    <!-- Scene 2: Brand Reveal -->
+    <div class="scene scene-2" id="scene2">
+      <div class="brand-container">
+        <div class="brand-logo" id="brandLogo">MBS<span>x</span></div>
+        <div class="brand-tagline" id="brandTagline">وكالة صحافة البيانات</div>
+        <div class="brand-subtitle" id="brandSubtitle">
+          نحول الأرقام المعقدة إلى قصص مؤثرة تصنع الفرق
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: Services -->
+    <div class="scene scene-3" id="scene3">
+      <div class="services-title" id="servicesTitle">خدماتنا المتميزة</div>
+      <div class="services-grid">
+        <div class="service-card" id="service1">
+          <div class="number">01</div>
+          <div class="name">تقارير احترافية</div>
+        </div>
+        <div class="service-card" id="service2">
+          <div class="number">02</div>
+          <div class="name">لوحات تفاعلية</div>
+        </div>
+        <div class="service-card" id="service3">
+          <div class="number">03</div>
+          <div class="name">استشارات استراتيجية</div>
+        </div>
+        <div class="service-card" id="service4">
+          <div class="number">04</div>
+          <div class="name">تدريب متخصص</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: Stats -->
+    <div class="scene scene-4" id="scene4">
+      <div class="stats-container">
+        <div class="stat-item" id="stat1">
+          <div class="stat-label">تقرير تم تسليمه</div>
+          <div class="stat-number"><span class="counter" data-target="500">0</span><span class="stat-plus">+</span></div>
+        </div>
+        <div class="stat-item" id="stat2">
+          <div class="stat-label">مؤسسة شريكة</div>
+          <div class="stat-number"><span class="counter" data-target="150">0</span><span class="stat-plus">+</span></div>
+        </div>
+        <div class="stat-item" id="stat3">
+          <div class="stat-label">لغات مدعومة</div>
+          <div class="stat-number"><span class="counter" data-target="3">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: CTA -->
+    <div class="scene scene-5" id="scene5">
+      <div class="cta-container">
+        <div class="cta-sectors" id="ctaSectors">
+          <span>القطاع الإعلامي</span> و <span>الاقتصادي</span>
+          <br>شريكك الموثوق
+        </div>
+        <div class="cta-brand" id="ctaBrand">MBS<span>x</span></div>
+        <div class="cta-slogan" id="ctaSlogan">البيانات تتحدث</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <script>
+    // Timeline Configuration (in milliseconds)
+    const timeline = {
+      totalDuration: 19000,
+      scenes: [
+        { start: 0, end: 4000, id: 'scene1' },
+        { start: 4000, end: 9000, id: 'scene2' },
+        { start: 9000, end: 12000, id: 'scene3' },
+        { start: 12000, end: 15000, id: 'scene4' },
+        { start: 15000, end: 19000, id: 'scene5' }
+      ]
+    };
+
+    let startTime = null;
+    let animationFrame = null;
+
+    // Create Particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 6 + 2;
+        particle.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          right: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation: float ${Math.random() * 4 + 3}s ease-in-out infinite;
+          animation-delay: ${Math.random() * 2}s;
+        `;
+        container.appendChild(particle);
+      }
+    }
+
+    // Create Data Lines
+    function createDataLines() {
+      const container = document.getElementById('dataLines');
+      for (let i = 0; i < 8; i++) {
+        const line = document.createElement('div');
+        line.className = 'data-line';
+        line.style.cssText = `
+          top: ${10 + i * 12}%;
+          width: ${Math.random() * 40 + 30}%;
+          right: ${Math.random() * 30}%;
+          animation-delay: ${i * 0.3}s;
+        `;
+        container.appendChild(line);
+      }
+    }
+
+    // Animate Counter
+    function animateCounter(element, duration = 2000) {
+      const target = parseInt(element.dataset.target);
+      const start = 0;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.floor(start + (target - start) * easeOut);
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Animation Functions
+    function animateElement(element, properties, delay = 0) {
+      setTimeout(() => {
+        Object.assign(element.style, properties);
+      }, delay);
+    }
+
+    function showScene(sceneId) {
+      const scene = document.getElementById(sceneId);
+      scene.style.opacity = '1';
+      scene.style.transition = 'opacity 0.8s ease';
+    }
+
+    function hideScene(sceneId) {
+      const scene = document.getElementById(sceneId);
+      scene.style.opacity = '0';
+      scene.style.transition = 'opacity 0.5s ease';
+    }
+
+    // Scene Animations
+    function playScene1() {
+      showScene('scene1');
+
+      // Show grid
+      document.querySelector('.bg-grid').style.opacity = '0.5';
+      document.querySelector('.bg-grid').style.transition = 'opacity 1s ease';
+
+      // Animate hook texts
+      const hookText1 = document.getElementById('hookText1');
+      const hookText2 = document.getElementById('hookText2');
+
+      setTimeout(() => {
+        hookText1.style.opacity = '1';
+        hookText1.style.transform = 'translateY(0)';
+        hookText1.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      }, 300);
+
+      setTimeout(() => {
+        hookText2.style.opacity = '1';
+        hookText2.style.transform = 'translateY(0)';
+        hookText2.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      }, 1500);
+    }
+
+    function playScene2() {
+      hideScene('scene1');
+      showScene('scene2');
+
+      // Show orbs
+      document.querySelectorAll('.orb').forEach((orb, i) => {
+        setTimeout(() => {
+          orb.style.opacity = '0.4';
+          orb.style.transition = 'opacity 1s ease';
+        }, i * 200);
+      });
+
+      const brandLogo = document.getElementById('brandLogo');
+      const brandTagline = document.getElementById('brandTagline');
+      const brandSubtitle = document.getElementById('brandSubtitle');
+
+      setTimeout(() => {
+        brandLogo.style.opacity = '1';
+        brandLogo.style.transform = 'scale(1)';
+        brandLogo.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      }, 300);
+
+      setTimeout(() => {
+        brandTagline.style.opacity = '1';
+        brandTagline.style.transform = 'translateY(0)';
+        brandTagline.style.transition = 'all 0.6s ease';
+      }, 800);
+
+      setTimeout(() => {
+        brandSubtitle.style.opacity = '1';
+        brandSubtitle.style.transition = 'opacity 0.8s ease';
+      }, 1400);
+    }
+
+    function playScene3() {
+      hideScene('scene2');
+      showScene('scene3');
+
+      const servicesTitle = document.getElementById('servicesTitle');
+      servicesTitle.style.opacity = '1';
+      servicesTitle.style.transition = 'opacity 0.5s ease';
+
+      ['service1', 'service2', 'service3', 'service4'].forEach((id, i) => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0) scale(1)';
+          el.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        }, 300 + i * 200);
+      });
+    }
+
+    function playScene4() {
+      hideScene('scene3');
+      showScene('scene4');
+
+      // Show particles
+      document.querySelectorAll('.particle').forEach(p => {
+        p.style.opacity = Math.random() * 0.5 + 0.2;
+        p.style.transition = 'opacity 0.5s ease';
+      });
+
+      ['stat1', 'stat2', 'stat3'].forEach((id, i) => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          el.style.opacity = '1';
+          el.style.transform = 'translateX(0)';
+          el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+
+          // Animate counter
+          const counter = el.querySelector('.counter');
+          if (counter) {
+            animateCounter(counter, 1500);
+          }
+        }, i * 400);
+      });
+    }
+
+    function playScene5() {
+      hideScene('scene4');
+      showScene('scene5');
+
+      // Show data lines
+      document.getElementById('dataLines').style.opacity = '1';
+      document.getElementById('dataLines').style.transition = 'opacity 0.5s ease';
+
+      const ctaSectors = document.getElementById('ctaSectors');
+      const ctaBrand = document.getElementById('ctaBrand');
+      const ctaSlogan = document.getElementById('ctaSlogan');
+
+      setTimeout(() => {
+        ctaSectors.style.opacity = '1';
+        ctaSectors.style.transition = 'opacity 0.6s ease';
+      }, 200);
+
+      setTimeout(() => {
+        ctaBrand.style.opacity = '1';
+        ctaBrand.style.transform = 'scale(1)';
+        ctaBrand.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      }, 800);
+
+      setTimeout(() => {
+        ctaSlogan.style.opacity = '1';
+        ctaSlogan.style.transition = 'opacity 0.6s ease';
+        ctaSlogan.style.animation = 'pulse-glow 2s ease-in-out infinite';
+      }, 1500);
+    }
+
+    // Main Animation Loop
+    function animate(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+
+      // Update progress bar
+      const progress = Math.min(elapsed / timeline.totalDuration, 1);
+      document.getElementById('progressFill').style.width = `${progress * 100}%`;
+
+      // Check which scene to play
+      timeline.scenes.forEach(scene => {
+        if (elapsed >= scene.start && elapsed < scene.start + 100) {
+          switch(scene.id) {
+            case 'scene1': playScene1(); break;
+            case 'scene2': playScene2(); break;
+            case 'scene3': playScene3(); break;
+            case 'scene4': playScene4(); break;
+            case 'scene5': playScene5(); break;
+          }
+        }
+      });
+
+      if (elapsed < timeline.totalDuration) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    }
+
+    // Initialize
+    function init() {
+      createParticles();
+      createDataLines();
+
+      // Start animation after a brief delay
+      setTimeout(() => {
+        animationFrame = requestAnimationFrame(animate);
+      }, 500);
+    }
+
+    // Start when page loads
+    window.addEventListener('load', init);
+
+    // Restart animation on click (for testing)
+    document.querySelector('.container').addEventListener('click', () => {
+      // Reset all elements
+      document.querySelectorAll('.scene').forEach(s => s.style.opacity = '0');
+      document.querySelectorAll('.orb').forEach(o => o.style.opacity = '0');
+      document.querySelectorAll('.particle').forEach(p => p.style.opacity = '0');
+      document.querySelector('.bg-grid').style.opacity = '0';
+      document.getElementById('dataLines').style.opacity = '0';
+
+      // Reset scene elements
+      document.querySelectorAll('.hook-text').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
+      });
+
+      document.getElementById('brandLogo').style.cssText = 'opacity: 0; transform: scale(0.5);';
+      document.getElementById('brandTagline').style.cssText = 'opacity: 0; transform: translateY(20px);';
+      document.getElementById('brandSubtitle').style.opacity = '0';
+
+      document.getElementById('servicesTitle').style.opacity = '0';
+      ['service1', 'service2', 'service3', 'service4'].forEach(id => {
+        document.getElementById(id).style.cssText = 'opacity: 0; transform: translateY(30px) scale(0.9);';
+      });
+
+      ['stat1', 'stat2', 'stat3'].forEach(id => {
+        document.getElementById(id).style.cssText = 'opacity: 0; transform: translateX(50px);';
+      });
+
+      document.getElementById('ctaSectors').style.opacity = '0';
+      document.getElementById('ctaBrand').style.cssText = 'opacity: 0; transform: scale(0.8);';
+      document.getElementById('ctaSlogan').style.opacity = '0';
+
+      document.getElementById('progressFill').style.width = '0%';
+
+      // Reset counters
+      document.querySelectorAll('.counter').forEach(c => c.textContent = '0');
+
+      // Cancel and restart
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      startTime = null;
+
+      setTimeout(() => {
+        animationFrame = requestAnimationFrame(animate);
+      }, 300);
+    });
+  </script>
+</body>
+</html>

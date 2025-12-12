@@ -250,3 +250,122 @@
     text-align: center;
   }
 }
+
+/* Developer Signature - Artistic Golden Style */
+.dev-signature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.dev-signature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c9a227 50%,
+    transparent
+  );
+}
+
+.dev-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.dev-link {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  position: relative;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.dev-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(201, 162, 39, 0.1) 0%,
+    rgba(255, 215, 0, 0.05) 50%,
+    rgba(201, 162, 39, 0.1) 100%
+  );
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dev-link:hover::before {
+  opacity: 1;
+}
+
+.dev-name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.dev-name-accent {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(
+    135deg,
+    #c9a227 0%,
+    #ffd700 25%,
+    #c9a227 50%,
+    #ffd700 75%,
+    #c9a227 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: golden-shimmer 3s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
+}
+
+.dev-link:hover .dev-name {
+  color: var(--text-primary);
+}
+
+.dev-link:hover .dev-name-accent {
+  animation-duration: 1s;
+  filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.5));
+}
+
+@keyframes golden-shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dev-signature {
+    padding-top: 1rem;
+  }
+}

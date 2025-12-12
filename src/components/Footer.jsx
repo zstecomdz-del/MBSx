@@ -93,6 +93,14 @@ const Footer = () => {
             <a href="#">Terms of Service</a>
           </div>
         </div>
+
+        <div className="dev-signature">
+          <span className="dev-text">Crafted by</span>
+          <a href="https://www.sitedz.store" target="_blank" rel="noopener noreferrer" className="dev-link">
+            <span className="dev-name">site</span>
+            <span className="dev-name-accent">Dz</span>
+          </a>
+        </div>
       </div>
     </footer>
   )
