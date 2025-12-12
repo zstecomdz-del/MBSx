@@ -1,0 +1,190 @@
+/* Ad Request Section */
+
+.ad-request {
+  padding: 8rem 0;
+  position: relative;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.ad-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ad-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 50% at 30% 20%,
+    rgba(201, 162, 39, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+.ad-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, var(--border-light) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--border-light) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--border-light) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--border-light) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  opacity: 0.3;
+}
+
+/* Form Container */
+.ad-form-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+.ad-form-container.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Form Grid */
+.ad-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.ad-form-left,
+.ad-form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Checkbox Grid */
+.form-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.form-checkbox:hover {
+  border-color: var(--border-light);
+  background: var(--bg-tertiary);
+}
+
+.form-checkbox input {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  position: relative;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--transition-fast);
+}
+
+.form-checkbox input:checked + .checkbox-custom {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.form-checkbox input:checked + .checkbox-custom::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* Boost Option */
+.boost-option {
+  margin-top: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.boost-option:hover {
+  border-color: var(--accent-gold);
+}
+
+.boost-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.boost-text strong {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.boost-text small {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Submit Button */
+.ad-form .submit-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1.125rem 2rem;
+}
+
+/* Success Message */
+.ad-form-container .success-message {
+  min-height: 350px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ad-request {
+    padding: 5rem 0;
+  }
+
+  .ad-form-container {
+    padding: 1.75rem;
+  }
+
+  .ad-form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}

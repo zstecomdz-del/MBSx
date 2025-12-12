@@ -1,0 +1,241 @@
+import React, { useState, useRef, useEffect } from 'react'
+import { useLanguage } from '../App'
+import './AdRequest.css'
+
+const AdRequest = () => {
+  const { t } = useLanguage()
+  const sectionRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [formData, setFormData] = useState({
+    institutionName: '',
+    sector: '',
+    adTypes: [],
+    adDetails: '',
+    email: '',
+    phone: '',
+    boostAd: false
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+    if (type === 'checkbox' && name === 'adTypes') {
+      setFormData(prev => ({
+        ...prev,
+        adTypes: checked
+          ? [...prev.adTypes, value]
+          : prev.adTypes.filter(t => t !== value)
+      }))
+    } else if (type === 'checkbox') {
+      setFormData(prev => ({ ...prev, [name]: checked }))
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }))
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    setIsSubmitting(false)
+    setIsSuccess(true)
+
+    // Reset after showing success
+    setTimeout(() => {
+      setIsSuccess(false)
+      setFormData({
+        institutionName: '',
+        sector: '',
+        adTypes: [],
+        adDetails: '',
+        email: '',
+        phone: '',
+        boostAd: false
+      })
+    }, 4000)
+  }
+
+  const adTypeOptions = [
+    { value: 'job', label: t('jobVacancy') },
+    { value: 'business', label: t('businessOpportunity') },
+    { value: 'tender', label: t('tender') },
+    { value: 'service', label: t('servicePromotion') },
+    { value: 'sponsored', label: t('sponsoredReport') },
+    { value: 'launch', label: t('productLaunch') },
+  ]
+
+  return (
+    <section id="ad-request" className="ad-request" ref={sectionRef}>
+      <div className="ad-bg">
+        <div className="ad-gradient" />
+        <div className="ad-pattern" />
+      </div>
+
+      <div className="container">
+        <div className={`section-header ${isVisible ? 'animate-fade-in-up' : ''}`}>
+          <span className="section-label">{t('advertiseWithUs')}</span>
+          <h2 className="section-title">Reach Your Target Audience</h2>
+          <p className="section-subtitle">
+            Promote your services, opportunities, and announcements to our network of media and economic institutions.
+          </p>
+        </div>
+
+        <div className={`ad-form-container ${isVisible ? 'animate-fade-in-up' : ''}`} style={{ animationDelay: '0.2s' }}>
+          {isSuccess ? (
+            <div className="success-message">
+              <div className="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <h3>Advertisement Request Submitted!</h3>
+              <p>{t('successMessage')}</p>
+            </div>
+          ) : (
+            <form className="ad-form" onSubmit={handleSubmit}>
+              <div className="ad-form-grid">
+                <div className="ad-form-left">
+                  <div className="form-group">
+                    <label className="form-label">{t('institutionName')}</label>
+                    <input
+                      type="text"
+                      name="institutionName"
+                      className="form-input"
+                      value={formData.institutionName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">{t('sector')}</label>
+                    <input
+                      type="text"
+                      name="sector"
+                      className="form-input"
+                      placeholder="e.g., Media, Finance, Technology"
+                      value={formData.sector}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">{t('email')}</label>
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-input"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">{t('phone')}</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      className="form-input"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="ad-form-right">
+                  <div className="form-group">
+                    <label className="form-label">{t('adType')}</label>
+                    <div className="form-checkbox-grid">
+                      {adTypeOptions.map(option => (
+                        <label key={option.value} className="form-checkbox">
+                          <input
+                            type="checkbox"
+                            name="adTypes"
+                            value={option.value}
+                            checked={formData.adTypes.includes(option.value)}
+                            onChange={handleChange}
+                          />
+                          <span className="checkbox-custom" />
+                          <span>{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">{t('adDetails')}</label>
+                    <textarea
+                      name="adDetails"
+                      className="form-textarea"
+                      placeholder={t('adDetailsPlaceholder')}
+                      value={formData.adDetails}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <label className="form-checkbox boost-option">
+                    <input
+                      type="checkbox"
+                      name="boostAd"
+                      checked={formData.boostAd}
+                      onChange={handleChange}
+                    />
+                    <span className="checkbox-custom" />
+                    <span className="boost-text">
+                      <strong>{t('boostAd')}</strong>
+                      <small>Get premium placement and extended reach</small>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className={`btn btn-primary submit-btn ${isSubmitting ? 'submitting' : ''}`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="spinner" />
+                ) : (
+                  <>
+                    {t('submit')}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default AdRequest
