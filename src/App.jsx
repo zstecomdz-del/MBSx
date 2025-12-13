@@ -48,7 +48,8 @@ const translations = {
 
     // Hero
     heroTitle: 'Data Journalism',
-    heroTitleHighlight: 'Reimagined',
+    heroTitleHighlight: `Media That Inspires
+Decisions That Shape`,
     heroSubtitle: 'Transforming complex data into compelling narratives. We empower media and economic institutions with actionable insights, custom reports, and strategic consulting.',
     exploreServices: 'Explore Services',
     requestConsultation: 'Request Consultation',
@@ -148,7 +149,8 @@ const translations = {
     training: 'Formation',
 
     heroTitle: 'Journalisme de Données',
-    heroTitleHighlight: 'Réinventé',
+    heroTitleHighlight: `Médias Qui Inspirent
+Décisions Qui Façonnent`,
     heroSubtitle: 'Transformer des données complexes en récits captivants. Nous donnons aux institutions médiatiques et économiques des informations exploitables.',
     exploreServices: 'Explorer les Services',
     requestConsultation: 'Demander une Consultation',

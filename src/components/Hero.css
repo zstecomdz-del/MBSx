@@ -170,6 +170,7 @@
   position: relative;
   display: inline-block;
   white-space: pre-line;
+  line-height: 1.35;
 }
 
 .hero-highlight::after {
