@@ -3,7 +3,7 @@ import { useLanguage } from '../App'
 import './Footer.css'
 
 const Footer = () => {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -94,13 +94,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="dev-signature">
-          <span className="dev-text">Crafted by</span>
-          <a href="https://www.sitedz.store" target="_blank" rel="noopener noreferrer" className="dev-link">
-            <span className="dev-name">site</span>
-            <span className="dev-name-accent">Dz</span>
-          </a>
-        </div>
+        {language !== 'ar' && (
+          <div className="dev-signature">
+            <span className="dev-text">Crafted by</span>
+            <a href="https://www.sitedz.store" target="_blank" rel="noopener noreferrer" className="dev-link">
+              <span className="dev-name">site</span>
+              <span className="dev-name-accent">Dz</span>
+            </a>
+          </div>
+        )}
       </div>
     </footer>
   )
