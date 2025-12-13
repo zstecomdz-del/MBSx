@@ -1,0 +1,358 @@
+/* About Us Section */
+
+.about-us {
+  padding: 10rem 0 8rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.about-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.about-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    rgba(201, 162, 39, 0.06) 0%,
+    transparent 50%
+  );
+}
+
+.about-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.5;
+}
+
+/* About Content */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.about-main {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  opacity: 0;
+}
+
+.about-main.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.about-description {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+
+/* About Grid - Vision & Mission */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: all var(--transition-medium);
+  opacity: 0;
+}
+
+.about-card.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.about-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.card-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--accent-gold);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-tertiary);
+}
+
+/* Values Section */
+.values-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  opacity: 0;
+}
+
+.values-section.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.values-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  opacity: 0;
+}
+
+.value-item.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.value-item:hover {
+  border-color: var(--border-light);
+  background: var(--bg-tertiary);
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .value-item:hover {
+  transform: translateX(-4px);
+}
+
+.value-number {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  opacity: 0.7;
+  min-width: 28px;
+  padding-top: 2px;
+}
+
+.value-text {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* CEO Section */
+.ceo-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+.ceo-section.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.ceo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2.5rem 4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-medium);
+}
+
+.ceo-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.ceo-image-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent-gold);
+  box-shadow: 0 8px 32px rgba(201, 162, 39, 0.2);
+}
+
+.ceo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.ceo-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+  pointer-events: none;
+}
+
+.ceo-info {
+  text-align: center;
+}
+
+.ceo-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.ceo-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us {
+    padding: 7rem 0 5rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
+  }
+
+  .about-card {
+    padding: 1.75rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .card-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .values-section {
+    padding: 2rem;
+  }
+
+  .values-title {
+    font-size: 1.5rem;
+  }
+
+  .value-item {
+    padding: 1rem;
+  }
+
+  .ceo-card {
+    padding: 2rem;
+  }
+
+  .ceo-image-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+
+  .ceo-name {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content {
+    gap: 2rem;
+  }
+
+  .about-card {
+    padding: 1.5rem;
+  }
+
+  .values-section {
+    padding: 1.5rem;
+  }
+
+  .value-item {
+    padding: 0.875rem;
+  }
+
+  .value-text {
+    font-size: 0.875rem;
+  }
+}

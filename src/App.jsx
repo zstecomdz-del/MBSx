@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import IntroSidebar from './components/IntroSidebar'
 import FloatingNav from './components/FloatingNav'
 import FloatingActions from './components/FloatingActions'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import Features from './components/Features'
-import ServiceRequest from './components/ServiceRequest'
-import AdRequest from './components/AdRequest'
 import Footer from './components/Footer'
 import SearchModal from './components/SearchModal'
 import NotificationPanel from './components/NotificationPanel'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 
 // Theme Context
 const ThemeContext = createContext()
@@ -134,6 +132,24 @@ Decisions That Shape`,
     notifications: 'Notifications',
     noNotifications: 'No new notifications',
     markAllRead: 'Mark all as read',
+
+    // About Us
+    aboutUsLabel: 'About Us',
+    aboutUsTitle: 'Data Journalism Agency',
+    aboutUsDesc: 'A media platform that combines the power of data with the depth of journalistic analysis. We provide interactive content that serves media institutions in developing their content. We aim to transform data into knowledge for companies and economic entities in society and decision-making, while providing analytics and dashboards that support their strategic decisions.',
+    visionTitle: 'Our Vision',
+    visionDesc: 'To become pioneers in building smart, data-driven media that combines analysis and innovation to serve decision-makers.',
+    missionTitle: 'Our Mission',
+    missionDesc: 'We work to develop the media and economic landscape through innovative data-based solutions.',
+    valuesTitle: 'Our Values',
+    value1: 'We believe that data is not just numbers, but intellectual energy that makes a difference.',
+    value2: 'We continuously strive to provide data and media content that reflects the highest standards of accuracy and excellence.',
+    value3: 'We work according to professional ethics to ensure the reliability of the content we provide.',
+    value4: 'Understanding numbers is the key to smart decisions.',
+    value5: 'We aim for our data to be a tool for development and informed decision-making.',
+    value6: 'Creativity is only achieved through learning and keeping pace with change.',
+    ceoTitle: 'CEO & Founder',
+    ceoName: 'Maroua Bosadia',
   },
   fr: {
     welcome: 'Bienvenue chez MBSx',
@@ -229,6 +245,24 @@ Décisions Qui Façonnent`,
     notifications: 'Notifications',
     noNotifications: 'Aucune nouvelle notification',
     markAllRead: 'Tout marquer comme lu',
+
+    // About Us
+    aboutUsLabel: 'À Propos',
+    aboutUsTitle: 'Agence de Journalisme de Données',
+    aboutUsDesc: 'Une plateforme médiatique qui allie la puissance des données à la profondeur de l\'analyse journalistique. Nous fournissons du contenu interactif au service des institutions médiatiques. Nous visons à transformer les données en connaissances pour les entreprises et les entités économiques, tout en fournissant des analyses et des tableaux de bord qui soutiennent leurs décisions stratégiques.',
+    visionTitle: 'Notre Vision',
+    visionDesc: 'Devenir des pionniers dans la construction de médias intelligents basés sur les données, alliant analyse et innovation au service des décideurs.',
+    missionTitle: 'Notre Mission',
+    missionDesc: 'Nous travaillons à développer le paysage médiatique et économique à travers des solutions innovantes basées sur les données.',
+    valuesTitle: 'Nos Valeurs',
+    value1: 'Nous croyons que les données ne sont pas de simples chiffres, mais une énergie intellectuelle qui fait la différence.',
+    value2: 'Nous nous efforçons continuellement de fournir un contenu qui reflète les plus hauts standards de précision et d\'excellence.',
+    value3: 'Nous travaillons selon l\'éthique professionnelle pour garantir la fiabilité du contenu que nous fournissons.',
+    value4: 'Comprendre les chiffres est la clé des décisions intelligentes.',
+    value5: 'Nous visons que nos données soient un outil de développement et de prise de décision éclairée.',
+    value6: 'La créativité ne s\'atteint que par l\'apprentissage et l\'adaptation au changement.',
+    ceoTitle: 'PDG & Fondatrice',
+    ceoName: 'Maroua Bosadia',
   },
   ar: {
     welcome: 'مرحباً بكم في MBSx',
@@ -324,13 +358,31 @@ Décisions Qui Façonnent`,
     notifications: 'الإشعارات',
     noNotifications: 'لا توجد إشعارات جديدة',
     markAllRead: 'تحديد الكل كمقروء',
+
+    // About Us
+    aboutUsLabel: 'من نحن',
+    aboutUsTitle: 'مؤسسة صحافة بيانات',
+    aboutUsDesc: 'منصة إعلامية تجمع بين قوة البيانات وعمق التحليل الصحفي. نقدم محتوى تفاعلياً يخدم المؤسسات الإعلامية في تطوير محتواها، نسعى إلى تحويل البيانات إلى معرفة للشركات والهيئات الاقتصادية في المجتمع وصناعة القرار، كما نوفر تحليلات ولوحات بيانات تدعم قراراتها الإستراتيجية.',
+    visionTitle: 'الرؤية',
+    visionDesc: 'أن نصبح رواداً في بناء إعلام ذكي قائم على البيانات، يجمع بين التحليل والإبتكار لخدمة صُنّاع القرار.',
+    missionTitle: 'الرسالة',
+    missionDesc: 'نعمل على تطوير المشهد الإعلامي والإقتصادي عبر حلول مبتكرة قائمة على البيانات.',
+    valuesTitle: 'القيم',
+    value1: 'نؤمن بأن البيانات ليست أرقاماً بل طاقة فكرية تصنع الفارق.',
+    value2: 'نسعى بإستمرار لتقديم محتوى بياني وإعلامي يعكس أعلى معايير الدقة والتميز.',
+    value3: 'نعمل وفق أخلاقيات المهنة لضمان موثوقية المحتوى الذي نقدمه.',
+    value4: 'فهم الأرقام هو مفتاح القرارات الذكية.',
+    value5: 'نهدف إلى أن تكون بياناتنا أداة للتنمية وصنع القرار الواعي.',
+    value6: 'الإبداع لا يتحقق إلا بالتعلم ومواكبة التغيير.',
+    ceoTitle: 'المديرة التنفيذية والمؤسسة',
+    ceoName: 'مروى بوسعدية',
   }
 }
 
 function App() {
-  const [theme, setTheme] = useState('light')
-  const [language, setLanguage] = useState('en')
-  const [showIntro, setShowIntro] = useState(true)
+  const [theme, setTheme] = useState(() => localStorage.getItem('mbsx-theme') || 'light')
+  const [language, setLanguage] = useState(() => localStorage.getItem('mbsx-language') || 'en')
+  const [showIntro, setShowIntro] = useState(() => !localStorage.getItem('mbsx-visited'))
   const [searchOpen, setSearchOpen] = useState(false)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [notifications, setNotifications] = useState([
@@ -340,17 +392,10 @@ function App() {
   ])
 
   useEffect(() => {
-    // Check if user has visited before
-    const hasVisited = localStorage.getItem('mbsx-visited')
-    if (hasVisited) {
-      setShowIntro(false)
-    }
-
-    // Load saved preferences
-    const savedTheme = localStorage.getItem('mbsx-theme')
-    const savedLanguage = localStorage.getItem('mbsx-language')
-    if (savedTheme) setTheme(savedTheme)
-    if (savedLanguage) setLanguage(savedLanguage)
+    // Set initial document attributes
+    document.documentElement.setAttribute('data-theme', theme)
+    document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr')
+    document.documentElement.setAttribute('lang', language)
   }, [])
 
   useEffect(() => {
@@ -388,52 +433,51 @@ function App() {
   const unreadCount = notifications.filter(n => !n.read).length
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <LanguageContext.Provider value={{ language, setLanguage, t }}>
-        <div className="app">
-          {showIntro && (
-            <IntroSidebar
-              onEnter={handleEnterSite}
-              onLanguageChange={setLanguage}
-            />
-          )}
-
-          {!showIntro && (
-            <>
-              <FloatingNav />
-              <FloatingActions
-                onSearchClick={() => setSearchOpen(true)}
-                onNotificationClick={() => setNotificationsOpen(true)}
-                unreadCount={unreadCount}
+    <Router>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <LanguageContext.Provider value={{ language, setLanguage, t }}>
+          <div className="app">
+            {showIntro && (
+              <IntroSidebar
+                onEnter={handleEnterSite}
+                onLanguageChange={setLanguage}
               />
+            )}
 
-              <main>
-                <Hero />
-                <Services />
-                <Features />
-                <ServiceRequest />
-                <AdRequest />
-              </main>
+            {!showIntro && (
+              <>
+                <FloatingNav />
+                <FloatingActions
+                  onSearchClick={() => setSearchOpen(true)}
+                  onNotificationClick={() => setNotificationsOpen(true)}
+                  unreadCount={unreadCount}
+                />
 
-              <Footer />
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                </Routes>
 
-              <SearchModal
-                isOpen={searchOpen}
-                onClose={() => setSearchOpen(false)}
-              />
+                <Footer />
 
-              <NotificationPanel
-                isOpen={notificationsOpen}
-                onClose={() => setNotificationsOpen(false)}
-                notifications={notifications}
-                onMarkRead={markNotificationRead}
-                onMarkAllRead={markAllNotificationsRead}
-              />
-            </>
-          )}
-        </div>
-      </LanguageContext.Provider>
-    </ThemeContext.Provider>
+                <SearchModal
+                  isOpen={searchOpen}
+                  onClose={() => setSearchOpen(false)}
+                />
+
+                <NotificationPanel
+                  isOpen={notificationsOpen}
+                  onClose={() => setNotificationsOpen(false)}
+                  notifications={notifications}
+                  onMarkRead={markNotificationRead}
+                  onMarkAllRead={markAllNotificationsRead}
+                />
+              </>
+            )}
+          </div>
+        </LanguageContext.Provider>
+      </ThemeContext.Provider>
+    </Router>
   )
 }
 

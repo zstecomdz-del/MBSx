@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage, useTheme } from '../App'
 import './FloatingNav.css'
 
@@ -7,8 +8,16 @@ const FloatingNav = () => {
   const { theme, toggleTheme } = useTheme()
   const [isExpanded, setIsExpanded] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isAboutPage = location.pathname === '/about'
 
   useEffect(() => {
+    if (isAboutPage) {
+      setActiveSection('about')
+      return
+    }
+
     const handleScroll = () => {
       const sections = ['hero', 'services', 'features', 'service-request', 'ad-request']
       const scrollPosition = window.scrollY + 200
@@ -27,12 +36,22 @@ const FloatingNav = () => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isAboutPage])
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    if (isAboutPage) {
+      navigate('/')
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    } else {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
     setIsExpanded(false)
   }
@@ -43,7 +62,8 @@ const FloatingNav = () => {
   }
 
   const navItems = [
-    { id: 'hero', label: t('home'), icon: 'home' },
+    { id: 'hero', label: t('home'), icon: 'home', isRoute: true, path: '/' },
+    { id: 'about', label: t('aboutUsLabel'), icon: 'about', isRoute: true, path: '/about' },
     { id: 'services', label: t('mediaServices'), icon: 'media' },
     { id: 'features', label: t('economicServices'), icon: 'economic' },
     { id: 'service-request', label: t('reports'), icon: 'reports' },
@@ -56,6 +76,12 @@ const FloatingNav = () => {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
           <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+      ),
+      about: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
         </svg>
       ),
       media: (
@@ -95,15 +121,16 @@ const FloatingNav = () => {
   return (
     <nav className={`floating-nav ${isExpanded ? 'expanded' : ''} ${isRTL ? 'rtl' : ''}`}>
       {/* Home Button - Always Visible */}
-      <button
-        className={`nav-home ${activeSection === 'hero' ? 'active' : ''}`}
-        onClick={scrollToTop}
+      <Link
+        to="/"
+        className={`nav-home ${activeSection === 'hero' && !isAboutPage ? 'active' : ''}`}
+        onClick={() => setIsExpanded(false)}
         title={t('home')}
       >
         <div className="nav-icon">
           {renderIcon('home')}
         </div>
-      </button>
+      </Link>
 
       {/* Expand Toggle */}
       <button
@@ -121,18 +148,34 @@ const FloatingNav = () => {
       {/* Navigation Items */}
       <div className="nav-items">
         {navItems.slice(1).map((item, index) => (
-          <button
-            key={item.id}
-            className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
-            onClick={() => scrollToSection(item.id)}
-            style={{ transitionDelay: isExpanded ? `${index * 0.05}s` : '0s' }}
-            title={item.label}
-          >
-            <div className="nav-icon">
-              {renderIcon(item.icon)}
-            </div>
-            <span className="nav-label">{item.label}</span>
-          </button>
+          item.isRoute ? (
+            <Link
+              key={item.id}
+              to={item.path}
+              className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => setIsExpanded(false)}
+              style={{ transitionDelay: isExpanded ? `${index * 0.05}s` : '0s' }}
+              title={item.label}
+            >
+              <div className="nav-icon">
+                {renderIcon(item.icon)}
+              </div>
+              <span className="nav-label">{item.label}</span>
+            </Link>
+          ) : (
+            <button
+              key={item.id}
+              className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => scrollToSection(item.id)}
+              style={{ transitionDelay: isExpanded ? `${index * 0.05}s` : '0s' }}
+              title={item.label}
+            >
+              <div className="nav-icon">
+                {renderIcon(item.icon)}
+              </div>
+              <span className="nav-label">{item.label}</span>
+            </button>
+          )
         ))}
 
         <div className="nav-divider" />
