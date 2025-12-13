@@ -55,7 +55,7 @@ const SearchModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="search-modal-overlay" onClick={onClose}>
-      <div className={`search-modal ${isRTL ? 'rtl' : ''}`} onClick={e => e.stopPropagation()}>
+      <div className={`search-modal ${isRTL ? 'rtl' : ''}`} dir={isRTL ? 'rtl' : 'ltr'} onClick={e => e.stopPropagation()}>
         <div className="search-header">
           <form className="search-form" onSubmit={handleSearch}>
             <div className="search-input-wrapper">
@@ -67,7 +67,6 @@ const SearchModal = ({ isOpen, onClose }) => {
                 ref={inputRef}
                 type="text"
                 className="search-input"
-                placeholder={t('searchPlaceholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -168,8 +167,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                   <path d="M21 21l-4.35-4.35" />
                 </svg>
               </div>
-              <h4>Start searching</h4>
-              <p>Enter keywords to find reports, dashboards, and services</p>
+              <h4>{t('startSearching')}</h4>
             </div>
           )}
         </div>
