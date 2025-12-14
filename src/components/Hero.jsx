@@ -76,18 +76,18 @@ const Hero = () => {
 
           <div className="hero-stats animate-fade-in-up stagger-5">
             <div className="stat">
-              <span className="stat-value">500+</span>
-              <span className="stat-label">Reports Delivered</span>
-            </div>
-            <div className="stat-divider" />
-            <div className="stat">
-              <span className="stat-value">150+</span>
-              <span className="stat-label">Institutions Served</span>
-            </div>
-            <div className="stat-divider" />
-            <div className="stat">
               <span className="stat-value">3</span>
-              <span className="stat-label">Languages Supported</span>
+              <span className="stat-label">{t('languagesSupported')}</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <span className="stat-value">2</span>
+              <span className="stat-label">{t('sectorsCovered')}</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <span className="stat-value">4</span>
+              <span className="stat-label">{t('coreServices')}</span>
             </div>
           </div>
         </div>
