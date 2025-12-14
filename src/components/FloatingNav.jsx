@@ -11,10 +11,35 @@ const FloatingNav = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const isAboutPage = location.pathname === '/about'
+  const isDataJournalismPage = location.pathname === '/data-journalism'
+  const isOurServicesPage = location.pathname === '/our-services'
+  const isKnowledgeCenterPage = location.pathname === '/knowledge-center'
+  const isPublicationsPage = location.pathname === '/publications'
+  const isAdvertisementsPage = location.pathname === '/advertisements'
 
   useEffect(() => {
     if (isAboutPage) {
       setActiveSection('about')
+      return
+    }
+    if (isDataJournalismPage) {
+      setActiveSection('data-journalism')
+      return
+    }
+    if (isOurServicesPage) {
+      setActiveSection('our-services')
+      return
+    }
+    if (isKnowledgeCenterPage) {
+      setActiveSection('knowledge-center')
+      return
+    }
+    if (isPublicationsPage) {
+      setActiveSection('publications')
+      return
+    }
+    if (isAdvertisementsPage) {
+      setActiveSection('advertisements')
       return
     }
 
@@ -36,10 +61,10 @@ const FloatingNav = () => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isAboutPage])
+  }, [isAboutPage, isDataJournalismPage, isOurServicesPage, isKnowledgeCenterPage, isPublicationsPage, isAdvertisementsPage])
 
   const scrollToSection = (sectionId) => {
-    if (isAboutPage) {
+    if (isAboutPage || isDataJournalismPage || isOurServicesPage || isKnowledgeCenterPage || isPublicationsPage || isAdvertisementsPage) {
       navigate('/')
       setTimeout(() => {
         const element = document.getElementById(sectionId)
@@ -64,10 +89,11 @@ const FloatingNav = () => {
   const navItems = [
     { id: 'hero', label: t('home'), icon: 'home', isRoute: true, path: '/' },
     { id: 'about', label: t('aboutUsLabel'), icon: 'about', isRoute: true, path: '/about' },
-    { id: 'services', label: t('mediaServices'), icon: 'media' },
-    { id: 'features', label: t('economicServices'), icon: 'economic' },
-    { id: 'service-request', label: t('reports'), icon: 'reports' },
-    { id: 'ad-request', label: t('training'), icon: 'training' },
+    { id: 'knowledge-center', label: t('knowledgeCenter'), icon: 'media', isRoute: true, path: '/knowledge-center' },
+    { id: 'our-services', label: t('ourServices'), icon: 'economic', isRoute: true, path: '/our-services' },
+    { id: 'data-journalism', label: t('dataJournalism'), icon: 'reports', isRoute: true, path: '/data-journalism' },
+    { id: 'publications', label: t('publications'), icon: 'training', isRoute: true, path: '/publications' },
+    { id: 'advertisements', label: t('advertisements'), icon: 'ads', isRoute: true, path: '/advertisements' },
   ]
 
   const renderIcon = (type) => {
@@ -112,6 +138,12 @@ const FloatingNav = () => {
           <path d="M6 12v5c3 3 9 3 12 0v-5" />
         </svg>
       ),
+      ads: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <path d="M9 17V7l7 10V7" />
+        </svg>
+      ),
     }
     return icons[type]
   }
@@ -123,7 +155,7 @@ const FloatingNav = () => {
       {/* Home Button - Always Visible */}
       <Link
         to="/"
-        className={`nav-home ${activeSection === 'hero' && !isAboutPage ? 'active' : ''}`}
+        className={`nav-home ${activeSection === 'hero' && !isAboutPage && !isDataJournalismPage && !isOurServicesPage && !isKnowledgeCenterPage && !isPublicationsPage && !isAdvertisementsPage ? 'active' : ''}`}
         onClick={() => setIsExpanded(false)}
         title={t('home')}
       >
