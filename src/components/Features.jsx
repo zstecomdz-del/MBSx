@@ -124,30 +124,6 @@ const Features = () => {
           ))}
         </div>
 
-        <div className={`features-highlight ${isVisible ? 'animate-fade-in-up' : ''}`} style={{ animationDelay: '0.6s' }}>
-          <div className="highlight-content">
-            <div className="highlight-badge">Enterprise Ready</div>
-            <h3 className="highlight-title">Built for Scale</h3>
-            <p className="highlight-text">
-              Our platform is designed to handle the demanding needs of large organizations,
-              with robust infrastructure and dedicated support for mission-critical operations.
-            </p>
-          </div>
-          <div className="highlight-metrics">
-            <div className="metric">
-              <span className="metric-value">99.9%</span>
-              <span className="metric-label">Uptime SLA</span>
-            </div>
-            <div className="metric">
-              <span className="metric-value">&lt;100ms</span>
-              <span className="metric-label">Response Time</span>
-            </div>
-            <div className="metric">
-              <span className="metric-value">24/7</span>
-              <span className="metric-label">Support</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
